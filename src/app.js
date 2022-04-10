@@ -152,7 +152,7 @@ let birds = []
 let check = []
 
 let sceneGroup, mixer, gltfVar, egg, eggT, bird, floor, segments
-function createFlower(x, z, scaler){
+function createEgg(x, z, scaler){
 
 
   gtlfLoader.load(
@@ -338,13 +338,13 @@ const center_of_wheel = {
                         }
 
 for(let i =1; i < 12; i ++){
-    createFlower(   center_of_wheel.x + (Math.cos(radian_interval * i) * radius),
+    createEgg(   center_of_wheel.x + (Math.cos(radian_interval * i) * radius),
             center_of_wheel.y + (Math.sin(radian_interval * i) * radius), 3)
 
-            createFlower(   center_of_wheel.x + (Math.cos(radian_interval * i) * (radius +20)),
+            createEgg(   center_of_wheel.x + (Math.cos(radian_interval * i) * (radius +20)),
                     center_of_wheel.y + (Math.sin(radian_interval * i) * (radius+20)), 2)
 
-                    createFlower(   center_of_wheel.x + (Math.cos(radian_interval * i) * (radius +33)),
+                    createEgg(   center_of_wheel.x + (Math.cos(radian_interval * i) * (radius +33)),
                             center_of_wheel.y + (Math.sin(radian_interval * i) * (radius+33)), 1)
 }
 
@@ -361,7 +361,7 @@ for(let i =1; i < 12; i ++){
 
 
 
-createFlower(0, 0, 6)
+createEgg(0, 0, 6)
 
 document.querySelector('.webgl').addEventListener( 'click', onClick, false )
 let started = false
@@ -394,8 +394,17 @@ function onClick(e) {
        const action = objectsToAnimate.filter(x => x.scene.uuid === intersects[0].object.parent.uuid)[0]
 
        if(action.animations[0] && intersects[0].object.material !== invisibleMaterial){
-         var audio2 = new Audio('screech.mp3');
-         audio2.play();
+
+         console.log( intersects[0].object.parent.position)
+
+         if(intersects[0].object.parent.position.x ===  0 && intersects[0].object.parent.position.z ===  0){
+           var audio3 = new Audio('inner.mp3');
+           audio3.play();
+         }else{
+           var audio2 = new Audio('screech.mp3');
+           audio2.play();
+         }
+
      mixer = new THREE.AnimationMixer(action.scene)
      console.log(mixer)
      gltfVar.animations.map(x => {
