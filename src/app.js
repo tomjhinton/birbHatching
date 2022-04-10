@@ -37,6 +37,7 @@ document.querySelector('#titular').addEventListener('click', (e) => {
 function task(i) {
     setTimeout(function() {
         // Add tasks to do
+        if(  filtered[i].egg.material !== invisibleMaterial){
         let  mixer = new THREE.AnimationMixer(filtered[i].animate.scene)
        checkMixers.push(mixer)
         filtered[i].animate.animations.map(x => {
@@ -48,6 +49,7 @@ function task(i) {
           audio.play();
         })
           filtered[i].egg.material= invisibleMaterial
+        }
     }, 2000 * i);
 }
 
